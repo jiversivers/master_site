@@ -3,4 +3,4 @@ from django.shortcuts import render
 
 # Create your views here.
 def home(request):
-    return HttpResponse("Hello, world. You're at the home page of the site.")
+    return HttpResponse("Hello, world. You're at the stravers home page index.")

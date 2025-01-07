@@ -17,9 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-import MySite
-from stravers import views
+from MySite import views
 
 urlpatterns = [
-    path('', views.home, name='stravers_home'),
+    path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    path('stravers/', include('stravers.urls')),
 ]
