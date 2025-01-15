@@ -1,0 +1,6 @@
+[submodule "strivers"]
+	path = strivers
+	url = https://www.github.com/jiversivers/strivers.git
+[submodule "resume"]
+	path = resume
+	url = https://www.github.com/jiversivers/resume.git
