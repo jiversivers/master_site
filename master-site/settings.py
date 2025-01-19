@@ -26,7 +26,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['jivers.me']
+ALLOWED_HOSTS = ['jivers.me', 'www.jivers.me']
 
 
 # Application definition
