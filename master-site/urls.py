@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('strivers/', include('strivers.urls')),
+    path('resume/', include('resume.urls')),
 ]
