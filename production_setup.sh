@@ -38,7 +38,9 @@ fi
 # Create fresh environment
 conda env create -f environment.yml
 conda activate your_env_name
+conda install gunicorn  # In case its never installed on dev machine environment
 pip install -r requirements.txt
+pip install strivers/strava_swagger   # In case reqs file fails to point to it correctly
 
 # Prep django
 python manage.py migrate
