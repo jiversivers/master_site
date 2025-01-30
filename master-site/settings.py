@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'strivers.middleware.SetAccessToken',
+    'strivers.middleware.EvalAccessToken',
 ]
 
 ROOT_URLCONF = 'master-site.urls'
