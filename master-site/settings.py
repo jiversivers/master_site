@@ -53,6 +53,8 @@ MIDDLEWARE = [
     'strivers.middleware.EvalAccessToken',
 ]
 
+SESSION_SERIALIZER = 'strivers.serializers.CustomModelSerializer'
+
 ROOT_URLCONF = 'master-site.urls'
 
 TEMPLATES = [
