@@ -53,7 +53,8 @@ MIDDLEWARE = [
     'strivers.middleware.EvalAccessToken',
 ]
 
-SESSION_SERIALIZER = 'strivers.serializers.CustomModelSerializer'
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+SESSION_SERIALIZER = 'strivers.serializers.CustomSessionSerializer'
 
 ROOT_URLCONF = 'master-site.urls'
 
