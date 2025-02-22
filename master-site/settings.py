@@ -11,22 +11,39 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+
+import environ
 from decouple import config
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Set up environment variables
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / ".env")  # Read from .env file
 
+# Core settings
+SECRET_KEY = env("DJANGO_SECRET_KEY", default="default-secret-key")
+DEBUG = env.bool("DJANGO_DEBUG", default=False)
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost'])
+CORS_ALLOWED_ORIGINS = env.list("DJANGO_CORS_ALLOWED_ORIGINS", default=None)
+
+# Database settings
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql' if env("DB_NAME") != "db.sqlite3" else 'django.db.backends.sqlite3',
+        'NAME': env("DB_NAME"),
+        'USER': env("DB_USER", default=""),
+        'PASSWORD': env("DB_PASSWORD", default=""),
+        'HOST': env("DB_HOST", default=""),
+        'PORT': env("DB_PORT", default=""),
+    }
+}
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('DJANGO_SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+# Security settings
+if not DEBUG:
+    SECURE_SSL_REDIRECT = env.bool("SECURE_SSL_REDIRECT", default=True)
+    CSRF_COOKIE_SECURE = env.bool("CSRF_COOKIE_SECURE", default=True)
+    SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", default=True)
 
 
 # Application definition
@@ -50,13 +67,21 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'strivers.middleware.EvalAccessToken',
+    'strivers.middleware.EvalAccessToken'
 ]
 
 SESSION_ENGINE = "django.contrib.sessions.backends.db"
 SESSION_SERIALIZER = 'strivers.serializers.CustomSessionSerializer'
 
 ROOT_URLCONF = 'master-site.urls'
+
+SUBDOMAIN_URLCONFS = {
+    None: 'master-site.urls',
+    'www': 'master-site.urls',
+    'resume': 'resume.urls',
+    'strivers': 'strivers.urls',
+}
+
 
 TEMPLATES = [
     {
