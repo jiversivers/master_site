@@ -13,7 +13,6 @@
 command -v conda > /dev/null 2>&1
 if [ $? -ne 0 ]; then
   wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-  bash Miniconda3-latest-Linux-x86_64.sh
 fi
 
 # Install nginx if not
@@ -45,6 +44,7 @@ conda activate your_env_name
 
 # Install gunicorn
 conda install gunicorn  # In case it wasn't installed on dev machine and thus not in reqs
+gunicorn --workers 3 master-site.wsgi:application
 
 # Install pip reqs
 pip install -r requirements.txt
@@ -53,3 +53,7 @@ pip install strivers/strava_swagger   # In case reqs file fails to point to it c
 # Prep django
 python manage.py migrate
 pyhton manage.py collectstatic
+
+sudo certbot --nginx -d jivers.me -d www.jivers.me
+sudo systemctl restart gunicorn
+sudo systemctl restart nginx

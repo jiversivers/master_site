@@ -2,7 +2,7 @@
 
 source .env
 echo ""
-echo "Copying to $EC2:"
+echo "Copying to $EC2:22"
 echo "${files[*]}"
 echo "Update files in .env to add or remove."
 
@@ -11,11 +11,35 @@ conda env export --name jiversivers_env > environment.yml # export environment f
 pip list --format=freeze > requirments.txt  # capture pip reqs in the case that they are not properly handled by conda
 git push -m 'preproduction push'  # getting production onto git hub for easy access on EC2
 
-# Copy each file to remote
-for file in "${files[@]}"
-do
-  scp -i ~/jivers.pem "$file" "$EC2":~/master-site #pushing .env to remote
-done
+# Create production .env
+#!/bin/bash
+
+# Define paths
+MASTER_ENV_FILE=".env"
+PROD_ENV_FILE=".env.production"
+
+echo "Setting up production environment..."
+
+# Extract all uncommented lines (common settings)
+grep -v '^#' "$MASTER_ENV_FILE" > "$PROD_ENV_FILE"
+
+# Extract uncommented production settings and append them
+grep '^## Production settings' -A 1000 "$MASTER_ENV_FILE" | sed 's/^# //' >> "$PROD_ENV_FILE"
+
+echo "Production .env file created. Copying to $EC2"
+scp -i ~/jivers.pem .env.production ubuntu@"$EC2":~/master-site/.env
 
 echo "Running production_setup.sh on $EC2"
-ssh ~/jivers.pem "$EC2" 'bash -s' < production_setup.sh # Run production_setup on EC2 instance
+ssh -i ~/jivers.pem ubuntu@"$EC2" 'chmod +x production_setup.sh' # Ensure production_setup is executable
+ssh -i ~/jivers.pem ubuntu@"$EC2" 'bash -s' < production_setup.sh # Run production_setup on EC2 instance
+
+# Copy non-cloned files into the project
+ssh -i ~jivers.pem ubuntu@"$EC2" < 'mv .env.production .env'
+
+# Copy each file to remote
+ssh -i ~/jivers.pem ubuntu@"$EC2" < 'mkdir -p master-site'
+for file in "${files[@]}"
+do
+  echo "copying $file to $EC2..."
+  scp -i ~/jivers.pem "$file" ubuntu@"$EC2":~/master-site #pushing .env to remote
+done
