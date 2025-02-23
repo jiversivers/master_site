@@ -73,7 +73,7 @@ MIDDLEWARE = [
 SESSION_ENGINE = "django.contrib.sessions.backends.db"
 SESSION_SERIALIZER = 'strivers.serializers.CustomSessionSerializer'
 
-ROOT_URLCONF = 'master-site.urls'
+ROOT_URLCONF = 'master_site.urls'
 
 SUBDOMAIN_URLCONFS = {
     None: 'master-site.urls',
