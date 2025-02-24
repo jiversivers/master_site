@@ -23,13 +23,13 @@ environ.Env.read_env(BASE_DIR / ".env")  # Read from .env file
 # Core settings
 SECRET_KEY = env("DJANGO_SECRET_KEY", default="default-secret-key")
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost'])
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost']) + env.list('EC2_IP')
 CORS_ALLOWED_ORIGINS = env.list("DJANGO_CORS_ALLOWED_ORIGINS", default=None)
 
 # Database settings
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql' if env("DB_NAME") != "db.sqlite3" else 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2' if env("DB_NAME") != "db.sqlite3" else 'django.db.backends.sqlite3',
         'NAME': env("DB_NAME"),
         'USER': env("DB_USER", default=""),
         'PASSWORD': env("DB_PASSWORD", default=""),
@@ -102,18 +102,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'master_site.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -149,7 +137,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'static/'
 
 
 # Default primary key field type

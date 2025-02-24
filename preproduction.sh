@@ -2,7 +2,7 @@
 
 source .env
 echo ""
-echo "Copying to $EC2:22"
+echo "Copying to $EC2_DNS:22"
 echo "${files[*]}"
 echo "Update files in .env to add or remove."
 
@@ -26,20 +26,20 @@ grep -v '^#' "$MASTER_ENV_FILE" > "$PROD_ENV_FILE"
 # Extract uncommented production settings and append them
 grep '^## Production settings' -A 1000 "$MASTER_ENV_FILE" | sed 's/^# //' >> "$PROD_ENV_FILE"
 
-echo "Production .env file created. Copying to $EC2"
-scp -i ~/jivers.pem .env.production ubuntu@"$EC2":~/master-site/.env
+echo "Production .env file created. Copying to $EC2_DNS"
+scp -i ~/jivers.pem .env.production ubuntu@"$EC2_DNS":~/master-site/.env
 
-echo "Running production_setup.sh on $EC2"
-ssh -i ~/jivers.pem ubuntu@"$EC2" 'chmod +x production_setup.sh' # Ensure production_setup is executable
-ssh -i ~/jivers.pem ubuntu@"$EC2" 'bash -s' < production_setup.sh # Run production_setup on EC2 instance
+echo "Running production_setup.sh on $EC2_DNS"
+ssh -i ~/jivers.pem ubuntu@"$EC2_DNS" 'chmod +x production_setup.sh' # Ensure production_setup is executable
+ssh -i ~/jivers.pem ubuntu@"$EC2_DNS" 'bash -s' < production_setup.sh # Run production_setup on EC2 instance
 
 # Copy non-cloned files into the project
-ssh -i ~jivers.pem ubuntu@"$EC2" < 'mv .env.production .env'
+ssh -i ~jivers.pem ubuntu@"$EC2_DNS" < 'mv .env.production .env'
 
 # Copy each file to remote
-ssh -i ~/jivers.pem ubuntu@"$EC2" < 'mkdir -p master-site'
+ssh -i ~/jivers.pem ubuntu@"$EC2_DNS" < 'mkdir -p master-site'
 for file in "${files[@]}"
 do
-  echo "copying $file to $EC2..."
-  scp -i ~/jivers.pem "$file" ubuntu@"$EC2":~/master-site #pushing .env to remote
+  echo "copying $file to $EC2_DNS..."
+  scp -i ~/jivers.pem "$file" ubuntu@"$EC2_DNS":~/master-site #pushing .env to remote
 done
