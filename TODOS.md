@@ -1,0 +1,2 @@
+- [ ] Create an NGINX configuration creator that pulls variables from .env to create and populate a configuration file
+- [ ] Fill out and clean up deployment guide while it's fresh on memory.

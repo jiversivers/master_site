@@ -5,7 +5,7 @@
   cd master-site
   git pull
 } || { # except
-  git clone --branch main --depth 1 --single-branch --recurse-submmodules https://www.github.com/jiversivers/master-site.git
+  git clone --branch main --depth 1 --single-branch --recurse-submodules https://www.github.com/jiversivers/master-site.git
   cd master-site
 }
 
