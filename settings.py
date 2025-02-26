@@ -16,7 +16,7 @@ import environ
 from decouple import config
 
 # Set up environment variables
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 env = environ.Env()
 environ.Env.read_env(BASE_DIR / ".env")  # Read from .env file
 
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home.apps.HomeConfig',
     'strivers.apps.StriversConfig',
     'resume.apps.ResumeConfig',
 ]
@@ -73,11 +74,11 @@ MIDDLEWARE = [
 SESSION_ENGINE = "django.contrib.sessions.backends.db"
 SESSION_SERIALIZER = 'strivers.serializers.CustomSessionSerializer'
 
-ROOT_URLCONF = 'master_site.urls'
+ROOT_URLCONF = 'urls'
 
 SUBDOMAIN_URLCONFS = {
-    None: 'master_site.urls',
-    'www': 'master_site.urls',
+    None: 'urls',
+    'www': 'urls',
     'resume': 'resume.urls',
     'strivers': 'strivers.urls',
 }
@@ -100,7 +101,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'master_site.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

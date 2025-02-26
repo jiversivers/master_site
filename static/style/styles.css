@@ -1,0 +1,29 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+header {
+    background-color: #1e1e1e;
+    text-align: center;
+    color: #ff7f00;
+}
+
+.navbar, .footer {
+    background-color: #1e1e1e;
+}
+
+.btn-primary {
+    background-color: #ff7f00;
+    border-color: #ff7f00;
+}
+
+.btn-primary:hover {
+    background-color: #e66a00;
+    border-color: #e66a00;
+}
+
+.card {
+    background-color: #1e1e1e;
+    border: 1px solid #ff7f00;
+}
