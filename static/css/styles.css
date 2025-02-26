@@ -1,5 +1,5 @@
 body {
-    background-color: #121212;
+    background-color: #1e1e1e;
     color: #ffffff;
 }
 
@@ -9,8 +9,16 @@ header {
     color: #ff7f00;
 }
 
-.navbar, .footer {
-    background-color: #1e1e1e;
+.bg-body-tertiary {
+    background-color: #ff7f00 !important;
+}
+
+.nav-link {
+    color: #3c3c3c;
+}
+
+.nav-link:active {
+    color: #000000;
 }
 
 .btn-primary {
@@ -26,4 +34,10 @@ header {
 .card {
     background-color: #1e1e1e;
     border: 1px solid #ff7f00;
+}
+
+footer {
+    background-color: #1e1e1e;
+    text-align: center;
+    color: #ff7f00;
 }
