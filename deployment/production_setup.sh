@@ -2,11 +2,11 @@
 
 # Get into upto-date master site (cloning it first if necessary)
 { # try
-  cd master-site
+  cd master_site
   git pull
 } || { # except
-  git clone --branch main --depth 1 --single-branch --recurse-submodules https://www.github.com/jiversivers/master-site.git
-  cd master-site
+  git clone --branch deployment --depth 1 --single-branch --recurse-submodules https://www.github.com/jiversivers/master_site.git
+  cd master_site
 }
 
 # Install conda if not already
@@ -21,9 +21,8 @@ if [$? -ne 0]; then
   sudo apt install nginx -y
 fi
 
-# Run nginx
-sudo systemctl start nginx
-sudo systemctl enable nginx
+# Create service files
+deployment/scripts/create_service_files.sh
 
 # Install to read yaml
 sudo apt install yq
