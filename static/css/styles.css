@@ -1,6 +1,6 @@
 body {
     background-color: #1e1e1e;
-    color: #ffffff;
+    color: #c8c8c8;
 }
 
 header {
@@ -14,7 +14,7 @@ header {
 }
 
 .nav-link {
-    color: #3c3c3c;
+    color: #4b4b4b;
 }
 
 .nav-link:active {
@@ -37,7 +37,75 @@ header {
 }
 
 footer {
-    background-color: #1e1e1e;
+    background-color: #3c3c3c;
     text-align: center;
     color: #ff7f00;
+    margin-top: auto;
 }
+
+
+.footer-copyright {
+    color: #c8c8c8;
+    text-align: center;
+}
+
+a {
+    color: #ff7f00;
+    text-decoration: none !important;
+}
+
+button {
+    color: #ff7f00;
+    background-color: #000000;
+    border-color: #ff7f00;
+}
+
+.list-footer-display {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.markdown {
+    text-align: justify;
+}
+
+#user_query {
+    color: #c8c8c8;
+    background-color: #000000;
+    border: #ff7f00 solid 1px;
+    padding: 5px;
+    border-radius: 10px;
+    width: 80%;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#response_area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    text-align: justify;
+    /* Add your desired styling here */
+}
+
+.input-container {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background-color: #1e1e1e; /* Match your theme */
+    padding: 10px;
+    z-index: 10;
+}
+

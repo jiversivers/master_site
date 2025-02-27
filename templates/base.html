@@ -24,30 +24,34 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+              <a class="nav-link {% if request.resolver_match.app_name == '' %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'resume:home' %}">Resume</a>
+              <a class="nav-link {% if request.resolver_match.app_name == 'resume' %}active{% endif %}" href="{% url 'resume:home' %}">Resume</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'strivers:home' %}">Strivers</a>
+              <a class="nav-link {% if request.resolver_match.app_name == 'strivers' %}active{% endif %}" href="{% url 'strivers:home' %}">Strivers</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <div class="container mt-5">
+    <div class="container mt-5 text-center">
         {% block content %}{% endblock %}
     </div>
 
     <footer class="footer mt-5 py-3 text-center">
-        <div class="container">
-            <span class="text-muted">&copy;JiversIvers</span>
-            <h2>
+        <ul class="list-footer-display">
+            <li>
                 <a href="{% url 'home' %}">Home</a>
+            </li>
+            <li>
                 <a href="mailto:iversjesse@gmail.com">Contact Me</a>
-            </h2>
+            </li>
+        </ul>
+        <div class="footer-copyright text-center py-5">
+            <span class="text">&copy;JiversIvers</span>
         </div>
     </footer>
 
