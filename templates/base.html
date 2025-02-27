@@ -29,9 +29,6 @@
             <li class="nav-item">
               <a class="nav-link {% if request.resolver_match.app_name == 'resume' %}active{% endif %}" href="{% url 'resume:home' %}">Resume</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link {% if request.resolver_match.app_name == 'strivers' %}active{% endif %}" href="{% url 'strivers:home' %}">Strivers</a>
-            </li>
           </ul>
         </div>
       </div>
