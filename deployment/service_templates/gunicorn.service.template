@@ -1,26 +1,13 @@
 [Unit]
 Description=gunicorn daemon for {{PROJECT_NAME}}
-After=network.target
-
-[Service]
-User=ubuntu
-Group=ubuntu
-WorkingDirectory={{PROJECT_DIR}}
-ExecStart={{GUNICORN_LOCATION}} --workers {{WORKERS}} --bind unix:gunicorn.sock {{PROJECT_NAME}}.wsgi:application
-
-[Install]
-WantedBy=multi-user.target
-
-[Unit]
-Description=gunicorn daemon for {{PROJECT_NAME}}
 Requires=gunicorn.socket
 After=network.target
 
 [Service]
 User=ubuntu
 Group=www-data
-WorkingDirectory={{PROJECT_PATH}}
-ExecStart={{GUNICORN_PATH}} --access-logfile - --workers {{WORKERS}} --bind unix:/run/gunicorn.sock {{PROJECT_NAME}}.wsgi:application
+WorkingDirectory={{PROJECT_DIR}}
+ExecStart={{GUNICORN_LOCATION}} --workers {{WORKERS}} --access-logfile - --bind unix:/run/gunicorn.sock {{PROJECT_NAME}}.wsgi:application
 
 [Install]
 WantedBy=multi-user.target

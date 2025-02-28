@@ -11,7 +11,7 @@ ACTIVATE="$5"
 SERVICE_FILE="/etc/systemd/system/gunicorn.service"
 SOCKET_FILE="/etc/systemd/system/gunicorn.socket"
 NGINX_CONF_FILE="/etc/nginx/sites-available/$PROJECT_NAME"
-NGINX_LINK="/etc/nginx/sites-enabled/"
+NGINX_LINK="/etc/nginx/sites-enabled/$PROJECT_NAME"
 
 # Check if all arguments are provided
 if [ "$#" -ne 6 ]; then
