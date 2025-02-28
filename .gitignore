@@ -1,6 +1,6 @@
 .idea/
 db.sqlite3
-.env
+.env*
 __pycache__/
 resume/rawsume.json
 requirements.txt
