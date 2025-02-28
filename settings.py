@@ -13,17 +13,17 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 
 import environ
-from decouple import config
 
 # Set up environment variables
 BASE_DIR = Path(__file__).resolve().parent
 env = environ.Env()
 environ.Env.read_env(BASE_DIR / ".env")  # Read from .env file
 
+
 # Core settings
 SECRET_KEY = env("DJANGO_SECRET_KEY", default="default-secret-key")
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost']) + env.list('EC2_IP')
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost']) + [env('EC2_IP')]
 CORS_ALLOWED_ORIGINS = env.list("DJANGO_CORS_ALLOWED_ORIGINS", default=None)
 
 # Database settings
@@ -37,6 +37,7 @@ DATABASES = {
         'PORT': env("DB_PORT", default=""),
     }
 }
+
 
 # Quick-start development settings - unsuitable for production
 # Security settings
