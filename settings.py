@@ -23,7 +23,7 @@ environ.Env.read_env(BASE_DIR / ".env")  # Read from .env file
 # Core settings
 SECRET_KEY = env("DJANGO_SECRET_KEY", default="default-secret-key")
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost']) + [env('EC2_IP')]
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost']) + [env('EC2_IP'), env('EC2_DNS')]
 CORS_ALLOWED_ORIGINS = env.list("DJANGO_CORS_ALLOWED_ORIGINS", default=None)
 
 # Database settings
