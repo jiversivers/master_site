@@ -46,6 +46,28 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = env.bool("CSRF_COOKIE_SECURE", default=True)
     SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", default=True)
 
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'file': {
+                'level': 'DEBUG',  # Adjust to 'INFO', 'DEBUG', or 'WARNING' based on your needs
+                'class': 'logging.FileHandler',
+                'filename': '/path/to/your/logfile.log',  # Path to the log file
+            },
+            'console': {
+                'level': 'ERROR',
+                'class': 'logging.StreamHandler',
+            }
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['console','file'],
+                'level': 'DEBUG',  # Log level (you can set it to DEBUG for more detailed logs)
+                'propagate': True,
+            },
+        },
+    }
 
 # Application definition
 
