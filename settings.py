@@ -53,7 +53,7 @@ if not DEBUG:
             'file': {
                 'level': 'DEBUG',  # Adjust to 'INFO', 'DEBUG', or 'WARNING' based on your needs
                 'class': 'logging.FileHandler',
-                'filename': '/path/to/your/logfile.log',  # Path to the log file
+                'filename': '/var/log/django/debug.log',  # Path to the log file
             },
             'console': {
                 'level': 'ERROR',
