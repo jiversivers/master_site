@@ -46,6 +46,23 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = env.bool("CSRF_COOKIE_SECURE", default=True)
     SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", default=True)
 
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'level': 'ERROR',
+                'class': 'logging.StreamHandler',
+            },
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['console'],
+                'level': 'ERROR',
+                'propagate': True,
+            },
+        },
+    }
 
 # Application definition
 
