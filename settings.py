@@ -69,7 +69,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'strivers.middleware.EvalAccessToken'
+    'strivers.middleware.EvalAccessToken',
+    'home.middleware.TrackVisit'
 ]
 
 SESSION_ENGINE = "django.contrib.sessions.backends.db"
