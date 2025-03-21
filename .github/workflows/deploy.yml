@@ -21,7 +21,7 @@ jobs:
         host: ${{ secrets.EC2_DNS }}
         username: ubuntu
         key: ${{ secrets.EC2_RSA }}
-        script: |
+        script:
           cd master_site
           git pull
           git submodule update --init --recursive --remote
