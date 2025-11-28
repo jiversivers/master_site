@@ -5,3 +5,4 @@ __pycache__/
 resume/rawsume.json
 requirements.txt
 environment.yml
+/_prvate/*
